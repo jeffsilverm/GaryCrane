@@ -19,6 +19,7 @@ Created on Wed Jul  6 17:55:31 2016
 
 import sys
 
+
 """
 leafCount(Tree)
 
@@ -119,6 +120,7 @@ def leafCount ( tree ):
     if and only if both children are empty tuples"""
     if TRACE :
         print( "In leaf count at {}".format( tree[0] ), file=sys.stderr )
+    assert len(tree) == 3, "In leafCount, at {}: the length of tree is {} but should be 3".format( tree[0], len(tree) )
     if tree[1] != () and tree[2] != () :
         return leafCount ( tree[1]) + leafCount ( tree[2])
     elif tree[1] != () :
@@ -129,6 +131,28 @@ def leafCount ( tree ):
 # This tree is a leaf, both children are empty
         return 1
 
+def find ( target, tree ):
+    """This function returns True if the given node is in the given Tree and returns False otherwise. """
+    if TRACE :
+        print( "In find, at {}. ".format(tree[0]), file=sys.stderr )
+    assert len(tree) == 3, "In find, at {}: the length of tree is {} but should be 3".format( tree[0], len(tree) )
+# If this tree is what we're looking for, then we're done.
+    if tree[0] == target :
+        return True
+# if this tree is not the tree we're looking for and this tree has no children, then it is hopeless.
+    elif tree[1] == () and tree[2] == () :
+        return False
+# If this tree is not the tree we're lookikng for AND it has children, then maybe one of its descendents is the
+# tree we're looking for.
+    else :
+        if tree[1] != () and tree[2] != ()  :
+            return find ( target, tree[1]) or find ( target, tree[2])
+        elif tree[1] != () :
+            return find ( target, tree[1])
+        elif tree[2] != () :
+            return find ( target, tree[2])
+        else :
+            raise AssertionError ("At {}: for some reason, we're here".format(tree[0]) )
 
 
 
@@ -150,16 +174,18 @@ if __name__ == "__main__" :
              ),
            ( "David", (),
              ("Eric", (),
-              ("Fred", (), ()),
-              ()
+              ("Fred", (), ())
               )
             )
-           ), (),
-          ( 'George', (), () )
-          )
-    ),
-        nominal=2, label="Jeff did it" )
+           ), ( 'George', (), () )
+        )
+       ),
+        nominal=3, label="Jeff did it" )
 
 
 
+
+    my_test ( find('W',Groodies), True, "W in Groodies" )
+    my_test ( find('A',Groodies), False, "A in Groodies" )
+    my_test ( find('E',Groodies), True, "E in Groodies" )
 
