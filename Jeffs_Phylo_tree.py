@@ -17,6 +17,7 @@ Created on Wed Jul  6 17:55:31 2016
 
 # This is from https://www.cs.hmc.edu/twiki/bin/view/CFB/PhylogeneticTrees
 
+from __future__ import print_function   # Makes the code work equally well on python 2 or python 3
 import sys
 
 
@@ -102,7 +103,7 @@ We will later use this function to calibrate trees so we can better estimate dat
 
 """
 
-TRACE=True
+TRACE=False
 
 Groodies =  ( "X",
                 ("Y",
