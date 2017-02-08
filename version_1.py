@@ -31,7 +31,26 @@ def test(x):
             useit=0 
             loseit=0''' 
     return max(onemax,useit,loseit) 
-    
+
+
+def test_test ( expected, x ):
+    """This function tests the test function"""
+    r = test(x)
+    if r != expected :
+        print "Failure in test_test.  Expected %d, got %d, argument was %s" % \
+              ( expected, r, x )
+
+if __name__ == "__main__" :
+    test_test(6,  [ 3, 6])
+    test_test(7,  [ 1, 7, 4])
+    test_test(11, [ 7, 1, 4])
+    test_test(11, [ 2, 3, 9])
+    test_test(4,  [ 1, 2, 3])
+    test_test(4,  [-7, 1, 4])
+    test_test(11, [ 1, 2, 3, 9])
+    test_test(3,  [-1, 2, 3])
+
+
 ''' examples of running the above code  for Version 1:
 test([1,2,3,9])
 A  9 [1, 2, 3, 9]
